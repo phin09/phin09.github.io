@@ -1,0 +1,16 @@
+### custom ###
+_data/
+_drafts/
+
+### theme setting ###
+*.gem
+.bundle
+.sass-cache
+_site
+Gemfile.lock
+
+### Jekyll ###
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
