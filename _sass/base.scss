@@ -52,6 +52,7 @@ footer { margin-bottom: 20px; }
 .menu ul li { display: inline;  margin-left: 10px; }
 .menu ul li a { text-decoration: none;  color: var(--text-color); }
 .menu ul li a:hover { text-decoration: none; color: var(--background-color); background-color: var(--base-color); }
+.menu ul li a.active {text-decoration: solid; color: var(--code-color-7); } // 2020-12-08 nav bar setting
 
 /**
  * Form
