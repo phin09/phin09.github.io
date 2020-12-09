@@ -1,0 +1,42 @@
+---
+title: About
+layout: default
+permalink: /about
+---
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> About </title>
+    <meta charset="UTF-8" />
+
+    <style>
+        body {
+            background: url(/assets/about/spaceship_bw.jpg) no-repeat 30% 70% fixed,
+                        url(/assets/about/station_bw.jpg) no-repeat 60% 70% fixed,
+                        url(/assets/about/shirts_bw.jpg) no-repeat 40% 20% fixed;
+            background-size: 40%;
+            background-color: black;
+        }
+        .blk-back {
+            background-color: black;
+        }
+        .table-img {
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td class="table-img" rowspan="2" align="center"><img src="{{ "/assets/about/about_bw.gif" | relative_url }}" width="50%"/></td>
+            <td><strong class="blk-back">강승연</strong><p class="blk-back">공대 가기 전부터 체크셔츠를 좋아했음</p></td>
+        </tr>
+        <tr>
+            <td><p class="blk-back">2018 전자공학과 졸업<br>2019 Internship at Stencil Master Inc. in San Jose<br>2020 bigdata 국비 교육 수료</p></td>
+        </tr>
+    </table>
+</body>
+</html>
