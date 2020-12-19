@@ -1,0 +1,20 @@
+/* @import "../main.scss"; */
+/* ERROR `/assets/main.scss' not found. */
+
+/* .inputBox class의 style이 우선적용 된다 생각했는데
+bass.scss:61의 input[type=text], select, textarea 가 우선 적용됨.
+임시방편 해결: !important; */
+
+.alignCenter {
+    text-align:center;
+}
+
+.inputBox {
+    display:inline;
+    text-align:center;
+    width:20pt !important;
+    background-color:var(--text-color) !important;
+    color:black !important;
+    letter-spacing:10px;
+    margin-right:10px;
+}

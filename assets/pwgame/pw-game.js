@@ -2,108 +2,114 @@
 
 // 수정해야 될 것
 // inputBox - map을 이용한 동적변수생성으로 바꿔야 됨
-// 지금은 중복되지 않는 숫자 조합을 뽑음. 중복 가능하게 바꾸기.
+// (일단 완료)지금은 중복되지 않는 숫자 조합을 뽑음. 중복 가능하게 바꾸기. -> 함수화하기
 // 정답을 맞춰도 정답 분기로 진입하지 않는 문제가 있음 - 타입문제로 추측됨
-// 도전 히스토리 추가
+// (일단 완료)도전 히스토리 추가 -> 시뮬돌리고 멘트 가시단계 UX 수정
 // 해결하고 시간 남으면 알아볼 것: input란의 가운데에 텍스트가 올 수는 없는지. 입력하면 다음 칸으로 커서 옮겨주기.
 
-let body = document.querySelector("body > div > main");
+const body = document.querySelector("body > div > main");
+const CENTER_CLASS = 'alignCenter';
+const INPUT_CLASS = 'inputBox';
 
 let baseWord = document.createElement('div');   // 단어
 baseWord.innerHTML = '<i class="fas fa-lock"></i> 3-digit password';
 // 여기서 textContent 쓰면 innerHTML로 준 게 사라짐
-baseWord.style = 'text-align:center;';
+baseWord.classList.add(CENTER_CLASS);
 body.append(baseWord);
 
 let baseForm = document.createElement('form');  // 폼
-baseForm.style = 'text-align:center;';
+baseForm.classList.add(CENTER_CLASS);
 body.append(baseForm);
 
 // inputBox - map을 이용한 동적변수생성으로 바꿔야 됨
 let inputBox1 = document.createElement('input'); // 입력창
-inputBox1.type = 'text';
-inputBox1.maxLength = 1;
-inputBox1.style = 'display:inline;text-align:center;width:20pt;background-color:var(--text-color);color:black;letter-spacing:10px;margin-right:10px';
+inputBox1.setAttribute('type', 'text');
+inputBox1.setAttribute('maxLength', '1');
+inputBox1.classList.add(INPUT_CLASS);
 baseForm.append(inputBox1);
 
 let inputBox2 = document.createElement('input'); // 입력창
-inputBox2.type = 'text';
-inputBox2.maxLength = 1;
-inputBox2.style = 'display:inline;text-align:center;width:20pt;background-color:var(--text-color);color:black;letter-spacing:10px;margin-right:10px';
+inputBox2.setAttribute('type', 'text');
+inputBox2.setAttribute('maxLength', '1');
+inputBox2.classList.add(INPUT_CLASS);
 baseForm.append(inputBox2);
 
 let inputBox3 = document.createElement('input'); // 입력창
-inputBox3.type = 'text';
-inputBox3.maxLength = 1;
-inputBox3.style = 'display:inline;text-align:center;width:20pt;background-color:var(--text-color);color:black;letter-spacing:10px;margin-right:10px';
+inputBox3.setAttribute('type', 'text');
+inputBox3.setAttribute('maxLength', '1');
+inputBox3.classList.add(INPUT_CLASS);
 baseForm.append(inputBox3);
 
 
 let btn = document.createElement('button'); // 버튼
 btn.innerHTML = '<i class="fas fa-key"></i>';
-// btn.textContent = 'submit';
 baseForm.append(btn);
 
 let feedback = document.createElement('div');   // 결과창
-feedback.style = 'text-align:center;';
+feedback.classList.add(CENTER_CLASS);
 body.append(feedback);
 
-// 지금은 중복되지 않는 숫자 조합을 뽑음. 중복 가능하게 바꿔도 될듯.
-let pool = [1, 2, 3, 4, 5, 6, 7, 8 , 9]; // 숫자후보
-let arr = []; // 숫자배열
+let history = document.createElement('div');    // 기록창
+history.classList.add(CENTER_CLASS);
+body.append(history);
+
+let arr = []; // 정답 숫자배열
 for (let i = 0; i < 3; i++) {
-    let temp = pool.splice(Math.floor(Math.random() * (9 - i)), 1)[0]; // 뽑은것
+    let temp = (Math.floor(Math.random() * 10)); // 뽑은것(중복 가능)
     arr.push(temp);
 }
+console.log(arr);
 
 let cnt = 0;
 
 baseForm.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    let answer = `${inputBox1.value}${inputBox2.value}${inputBox3.value}`;
-    console.log(answer);
+    let inputStr = `${inputBox1.value}${inputBox2.value}${inputBox3.value}`;
+    console.log(inputStr);
 
-    if (answer == arr.join()) { // 정답을 맞춰도 여기 진입하지 않는 문제가 있음
+    if (inputStr == arr.join()) { // 정답을 맞춰도 여기 진입하지 않는 문제가 있음
         feedback.textContent = '정답';
+        history.textContent = '';
         inputBox1.value = '';
         inputBox2.value = '';
         inputBox3.value = '';
         inputBox1.focus();
-        pool = [1, 2, 3, 4, 5, 6, 7, 8 , 9]; // 숫자후보
+
         arr = []; // 숫자배열
         for (let i = 0; i < 3; i++) {
-            let temp = arr.splice(Math.floor(Math.random() * (9 - i)), 1)[0] // 뽑은것
+            let temp = (Math.floor(Math.random() * 10)); // 뽑은것(중복 가능)
             arr.push(temp);
         }
 
         cnt = 0;
     } else {
-        let ansArr = answer.split(''); // 답배열. inputBox에 들어온 답을 배열로
-        console.log(ansArr);
+        let inputArr = inputStr.split(''); // 응답배열. inputBox에 들어온 답을 배열로
+        console.log(inputArr);
         let strike = 0;
         let ball = 0;
         cnt++;
         if (cnt > 4) {
-            feedback.textContent = `The answer is ${arr}`;
+            feedback.textContent = `The inputStr is ${arr}`;
+            history.textContent = '';
             inputBox1.value = '';
             inputBox2.value = '';
             inputBox3.value = '';
             inputBox1.focus();
-            pool = [1, 2, 3, 4, 5, 6, 7, 8 , 9]; // 숫자후보
+
             arr = []; // 숫자배열
             for (let i = 0; i < 3; i++) {
-                let temp = arr.splice(Math.floor(Math.random() * (9 - i)), 1)[0] // 뽑은것
+                let temp = (Math.floor(Math.random() * 10)); // 뽑은것(중복 가능)
                 arr.push(temp);
             }
 
             cnt = 0;
         } else {
             for (let i = 0; i < 3; i++) {
-                if (ansArr[i] === Number(arr[i])) {
+                if (inputArr[i] === Number(arr[i])) {
                     strike++;
                 } else {
-                    if (arr.indexOf(Number(ansArr[i])) > -1) {
+                    if (arr.indexOf(Number(inputArr[i])) > -1) {
                     ball++;
                     }
                 }
@@ -115,6 +121,9 @@ baseForm.addEventListener('submit', function (e) {
             inputBox2.value = '';
             inputBox3.value = '';
             inputBox1.focus();
+
+            history.innerHTML += `${inputStr} => ${strike} / ${ball}<br>`;  // 이전 기록에 지금 결과를 이어붙임
         }
     }
+
 });
