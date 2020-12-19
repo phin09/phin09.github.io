@@ -9,4 +9,5 @@ permalink: /
 ---
 
 # Home
-전체 글 목록
+지금 여기는 TIL만 있습니다.  
+[TIL 외의 글이 있는 블로그](https://phin09.tistory.com/)
